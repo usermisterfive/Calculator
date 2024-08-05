@@ -13,10 +13,10 @@
         android:text="operation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minusButton"
-        app:layout_constraintVertical_bias="0.056" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <Button
         android:id="@+id/oneButton"
@@ -112,7 +112,7 @@
         android:id="@+id/plusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="308dp"
         android:text="+"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="272dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="368dp"
         android:text="="
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -142,8 +142,8 @@
         android:id="@+id/equalsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="64dp"
         android:text="="
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/expressionTextView" />
@@ -172,7 +172,7 @@
         android:id="@+id/minusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="272dp"
         android:layout_marginTop="308dp"
         android:text="-"
         app:layout_constraintStart_toStartOf="parent"
@@ -182,9 +182,19 @@
         android:id="@+id/multiplyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="308dp"
         android:text="*"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pointButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="244dp"
+        android:text="."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

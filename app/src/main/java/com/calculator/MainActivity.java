@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  ((TextView) findViewById(R.id.appVersionTextView)).setText("v3.1.0");
+  ((TextView) findViewById(R.id.appVersionTextView)).setText("4.0.0");
   TextView expressionTextView = findViewById(R.id.expressionTextView);
   expressionTextView.setText("0");
   findViewById(R.id.oneButton).setOnClickListener((View v) -> typeDigit(expressionTextView, 1));
@@ -34,7 +34,12 @@ public class MainActivity extends AppCompatActivity {
    ((TextView) findViewById(R.id.equalsTextView)).setText("="
      + Helper.sumMiltiply(Helper.parse(expressionTextView.getText().toString()))));
   findViewById(R.id.resetButton).setOnClickListener((View v) ->
-   expressionTextView.setText(""));
+    expressionTextView.setText(""));
+  findViewById(R.id.pointButton).setOnClickListener((View v) -> {
+   if (expressionTextView.getText().toString().matches(".*\\d$")) {
+    expressionTextView.setText(expressionTextView.getText() + ".");
+   }
+  });
  }
  void typeDigit(TextView expressionTextView, Integer digit) {
   if (expressionTextView.getText().equals("0")) {
