@@ -13,8 +13,10 @@
         android:text="operation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/minusButton"
+        app:layout_constraintVertical_bias="0.056" />
 
     <Button
         android:id="@+id/oneButton"
@@ -60,8 +62,8 @@
         android:id="@+id/fiveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="108dp"
         android:text="5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -90,7 +92,7 @@
         android:id="@+id/eightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="176dp"
         android:text="8"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="308dp"
         android:text="+"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -120,7 +122,7 @@
         android:id="@+id/zeroButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="244dp"
         android:text="0"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,11 +142,11 @@
         android:id="@+id/equalsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="416dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="40dp"
         android:text="="
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/expressionTextView" />
 
     <TextView
         android:id="@+id/appVersionTextView"
@@ -152,7 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="appVersion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,9 +162,19 @@
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="244dp"
         android:text="C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/minusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="308dp"
+        android:text="-"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

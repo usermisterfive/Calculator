@@ -6,16 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
- final int version = 1;
  @Override
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  ((TextView) findViewById(R.id.appVersionTextView)).setText("v" + version);
+  ((TextView) findViewById(R.id.appVersionTextView)).setText("v" + "2.0.0");
   TextView expressionTextView = findViewById(R.id.expressionTextView);
   expressionTextView.setText("0");
   findViewById(R.id.oneButton).setOnClickListener((View v) -> {
@@ -101,22 +100,73 @@ public class MainActivity extends AppCompatActivity {
   findViewById(R.id.plusButton).setOnClickListener((View v) -> {
    expressionTextView.setText(expressionTextView.getText() + "+");
   });
+  findViewById(R.id.minusButton).setOnClickListener((View v) -> {
+   expressionTextView.setText(expressionTextView.getText() + "-");
+  });
   findViewById(R.id.equalsButton).setOnClickListener((View v) -> {
    String expression = expressionTextView.getText().toString();
-   if (expression.contains("+")) {
-    List<String> numbers = Arrays.asList(expression.split("[+]"));
-    String expression2 = "=";
-    Integer number0 = 0;
-    for (String number : numbers) {
-     number0 = (number0 + Integer.parseInt(number));
-    }
-    expression2 = expression2 + number0;
-    ((TextView) findViewById(R.id.equalsTextView))
-      .setText(expression2);
-   }
+   sum(parse(expression));
+   String expression2 = "=" + sum(parse(expression));
+   ((TextView) findViewById(R.id.equalsTextView)).setText(expression2);
   });
   findViewById(R.id.resetButton).setOnClickListener((View v) -> {
    expressionTextView.setText("");
   });
  }
+ static int sum(List<Integer> list) {
+  int sum = 0;
+  for (Integer number: list) {
+   sum = sum + number;
+  }
+  return sum;
+ }
+ static List parse(String expression) {
+  List<List<?>> expression3 = new ArrayList<>();
+  List<Integer> expression2 = new ArrayList<>();
+  char[] chars = expression.toCharArray();
+  List<String> stringNumbers = new ArrayList<>();
+  List<String> operators = new ArrayList<>();
+  int numberId = 0;
+  for (int iteration = 0; iteration < chars.length; iteration++) {
+   String stringCharacter = String.valueOf(chars[iteration]);
+   if (isParsableInteger(stringCharacter)) {
+    if (iteration == 0) {
+     operators.add("+");
+    }
+    if (stringNumbers.size() < numberId + 1) {
+     stringNumbers.add("");
+    }
+    stringNumbers.set(numberId, stringNumbers.get(numberId) + stringCharacter);
+   } else {
+    if (iteration != 0) {
+     numberId++;
+    }
+    operators.add(stringCharacter);
+   }
+
+  }
+  expression3.add(stringNumbers);
+  expression3.add(operators);
+  if (stringNumbers.size() == operators.size()) {
+   for (int iteration = 0; iteration < stringNumbers.size(); iteration++) {
+    Integer number = Integer.parseInt(stringNumbers.get(iteration));
+    if (operators.get(iteration).equals("-")) {
+     number = - number;
+    }
+    expression2.add(number);
+   }
+  }
+  return expression2;
+ }
+ static boolean isParsableInteger(String value) {
+  boolean isParsable;
+  try {
+   Integer.parseInt(value);
+   isParsable = true;
+  } catch (NumberFormatException numberFormatException) {
+   isParsable = false;
+  }
+  return isParsable;
+ }
+
 }
