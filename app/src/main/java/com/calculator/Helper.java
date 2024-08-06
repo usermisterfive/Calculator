@@ -1,5 +1,7 @@
 package com.calculator;
 
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,17 +52,19 @@ public class Helper {
    List<String> numbers = list.get(0);
    List<String> operators = list.get(1);
    List<Double> expression2 = new ArrayList<>();
-   for (int iteration = 0; iteration < numbers.size(); iteration++) {
-    if (operators.contains("*")) {
-     int index = operators.indexOf("*"); //2
-     Double numbersMultiplied = Double.parseDouble(numbers.get(index))
-       * Double.parseDouble(numbers.get(index - 1));
-     System.out.println("numbersMultiplied=" + numbersMultiplied);
-     numbers.set(index - 1, numbersMultiplied.toString());
-     numbers.remove(index);
-     operators.remove(index);
-    }
-   }
+//   for (int iteration = 0; iteration < numbers.size(); iteration++) {
+//    if (operators.contains("*")) {
+//     int index = operators.indexOf("*"); //2
+//     Double numbersMultiplied = Double.parseDouble(numbers.get(index))
+//       * Double.parseDouble(numbers.get(index - 1));
+//     System.out.println("numbersMultiplied=" + numbersMultiplied);
+//     numbers.set(index - 1, numbersMultiplied.toString());
+//     numbers.remove(index);
+//     operators.remove(index);
+//    }
+//   }
+   replaceMultiplyDivide(numbers, operators, "*");
+   replaceMultiplyDivide(numbers, operators, "/");
    for (int iteration = 0; iteration < numbers.size(); iteration++) {
     Double number = Double.parseDouble(numbers.get(iteration));
     if (operators.get(iteration).equals("-")) {
@@ -74,5 +78,29 @@ public class Helper {
   }
   return sum;
  }
-
+ static void typeDigit(TextView expressionTextView, Integer digit) {
+  if (expressionTextView.getText().equals("0")) {
+   expressionTextView.setText(digit.toString());
+  } else {
+   expressionTextView.setText(expressionTextView.getText() + digit.toString());
+  }
+ }
+ static void replaceMultiplyDivide(List<String> numbers, List<String> operators, String operator) {
+  for (int iteration = 0; iteration < numbers.size(); iteration++) {
+   if (operators.contains(operator)) {
+    int index = operators.indexOf(operator);
+    Double numbersOperated = Double.NaN;
+    if (operator.equals("*")) {
+     numbersOperated = Double.parseDouble(numbers.get(index))
+       * Double.parseDouble(numbers.get(index - 1));
+    } else if (operator.equals("/")) {
+     numbersOperated = Double.parseDouble(numbers.get(index - 1)) /
+       Double.parseDouble(numbers.get(index));
+    }
+    numbers.set(index - 1, numbersOperated.toString());
+    numbers.remove(index);
+    operators.remove(index);
+   }
+  }
+ }
 }
