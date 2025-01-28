@@ -11,9 +11,12 @@ public class MainActivity extends AppCompatActivity {
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  ((TextView) findViewById(R.id.appVersionTextView)).setText("5.0.0");
+  ((TextView) findViewById(R.id.appVersionTextView)).setText("6.0.0");
   TextView expressionTextView = findViewById(R.id.expressionTextView);
   expressionTextView.setText("0");
+  initListeners(expressionTextView);
+ }
+ private void initListeners(TextView expressionTextView) {
   findViewById(R.id.oneButton).setOnClickListener((View v) ->
     Helper.typeDigit(expressionTextView, 1));
   findViewById(R.id.twoButton).setOnClickListener((View v) ->
@@ -35,15 +38,18 @@ public class MainActivity extends AppCompatActivity {
   findViewById(R.id.zeroButton).setOnClickListener((View v) ->
     Helper.typeDigit(expressionTextView, 0));
   findViewById(R.id.plusButton).setOnClickListener((View v) ->
-    expressionTextView.setText(expressionTextView.getText() + "+"));
+    expressionTextView.setText(
+      Helper.removeDuplicateOperator(expressionTextView) + Operators.PLUS.getSign()));
   findViewById(R.id.minusButton).setOnClickListener((View v) ->
-    expressionTextView.setText(expressionTextView.getText() + "-"));
+    expressionTextView.setText(
+      Helper.removeDuplicateOperator(expressionTextView) + Operators.MINUS.getSign()));
   findViewById(R.id.multiplyButton).setOnClickListener((View v) ->
-    expressionTextView.setText(expressionTextView.getText() + "*"));
-  findViewById(R.id.multiplyButton).setOnClickListener((View v) ->
-    expressionTextView.setText(expressionTextView.getText() + "*"));
+    expressionTextView.setText(
+      Helper.removeDuplicateOperator(expressionTextView) + Operators.MULTIPLY.getSign()));
   findViewById(R.id.divideButton).setOnClickListener((View v) ->
-    expressionTextView.setText(expressionTextView.getText() + "/"));
+    expressionTextView.setText(
+      Helper.removeDuplicateOperator(expressionTextView) + Operators.DIVIDE.getSign()));
+
   findViewById(R.id.equalsButton).setOnClickListener((View v) ->
     ((TextView) findViewById(R.id.equalsTextView)).setText("="
       + Helper.sumMiltiply(Helper.parse(expressionTextView.getText().toString()))));
@@ -54,6 +60,18 @@ public class MainActivity extends AppCompatActivity {
     expressionTextView.setText(expressionTextView.getText() + ".");
    }
   });
+
+ }
+
+}
+enum Operators {
+ PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
+ private String sign;
+ Operators(String sign) {
+  this.sign = sign;
+ }
+ public String getSign() {
+  return sign;
  }
 
 }
