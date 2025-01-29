@@ -45,15 +45,15 @@ public class Helper {
   System.out.println("stringNumbers=" + stringNumbers + ", operators=" + operators);
   return expression3;
  }
- static double sumMiltiply(List<List<String>> list) {
+ static double calculate(List<List<String>> list) {
   Double sum = 0.0;
   System.out.println("list=" + list);
   if (list.size() == 2) {
    List<String> numbers = list.get(0);
    List<String> operators = list.get(1);
    List<Double> expression2 = new ArrayList<>();
-   replaceMultiplyDivide(numbers, operators, Operators.MULTIPLY.getSign());
-   replaceMultiplyDivide(numbers, operators, Operators.DIVIDE.getSign());
+   multiplyDivide(numbers, operators, Operators.MULTIPLY.getSign());
+   multiplyDivide(numbers, operators, Operators.DIVIDE.getSign());
    for (int iteration = 0; iteration < numbers.size(); iteration++) {
     Double number = Double.parseDouble(numbers.get(iteration));
     if (operators.get(iteration).equals(Operators.MINUS.getSign())) {
@@ -74,7 +74,7 @@ public class Helper {
    expressionTextView.setText(expressionTextView.getText() + digit.toString());
   }
  }
- static void replaceMultiplyDivide(List<String> numbers, List<String> operators, String operator) {
+ static void multiplyDivide(List<String> numbers, List<String> operators, String operator) {
   for (int iteration = 0; iteration < numbers.size(); iteration++) {
    if (operators.contains(operator)) {
     int index = operators.indexOf(operator);

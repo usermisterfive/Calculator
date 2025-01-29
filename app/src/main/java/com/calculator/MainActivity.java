@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
  @Override
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  ((TextView) findViewById(R.id.appVersionTextView)).setText("6.0.0");
+  ((TextView) findViewById(R.id.appVersionTextView)).setText("7.0.0");
   TextView expressionTextView = findViewById(R.id.expressionTextView);
   expressionTextView.setText("0");
   initListeners(expressionTextView);
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     Helper.typeDigit(expressionTextView, 9));
   findViewById(R.id.zeroButton).setOnClickListener((View v) ->
     Helper.typeDigit(expressionTextView, 0));
+
   findViewById(R.id.plusButton).setOnClickListener((View v) ->
     expressionTextView.setText(
       Helper.removeDuplicateOperator(expressionTextView) + Operators.PLUS.getSign()));
@@ -50,11 +54,28 @@ public class MainActivity extends AppCompatActivity {
     expressionTextView.setText(
       Helper.removeDuplicateOperator(expressionTextView) + Operators.DIVIDE.getSign()));
 
-  findViewById(R.id.equalsButton).setOnClickListener((View v) ->
-    ((TextView) findViewById(R.id.equalsTextView)).setText("="
-      + Helper.sumMiltiply(Helper.parse(expressionTextView.getText().toString()))));
+  findViewById(R.id.equalsButton).setOnClickListener((View v) -> {
+   String expression = expressionTextView.getText().toString();
+   List<Boolean> endsWithOperatorTests = new ArrayList<>();
+   do {
+    endsWithOperatorTests.clear();
+    for (Operators operator : Operators.values()) {
+     boolean endsWithOperator2 = expression.endsWith(operator.getSign());
+     if (endsWithOperator2) {
+      expression = expression.substring(0, expression.length() - 1);
+     }
+     endsWithOperatorTests.add(endsWithOperator2);
+    }
+
+   } while (endsWithOperatorTests.contains(true));
+   expressionTextView.setText(expression);
+   ((TextView) findViewById(R.id.equalsTextView)).setText("="
+      + Helper.calculate(Helper.parse(expression)));
+  });
+
   findViewById(R.id.resetButton).setOnClickListener((View v) ->
     expressionTextView.setText(""));
+
   findViewById(R.id.pointButton).setOnClickListener((View v) -> {
    if (expressionTextView.getText().toString().matches(".*\\d$")) {
     expressionTextView.setText(expressionTextView.getText() + ".");
