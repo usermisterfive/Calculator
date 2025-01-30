@@ -2,7 +2,12 @@ package com.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  ((TextView) findViewById(R.id.appVersionTextView)).setText("8.0.0");
+  ((TextView) findViewById(R.id.appVersionTextView)).setText("9.0.0");
   TextView expressionTextView = findViewById(R.id.expressionTextView);
   expressionTextView.setText("0");
   initListeners(expressionTextView);
@@ -89,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
 
    }
    expressionTextView.setText(expression);
+  });
+
+  findViewById(R.id.copyButton).setOnClickListener((View v) -> {
+   ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE))
+     .setPrimaryClip(ClipData.newPlainText("",
+       expressionTextView.getText().toString()));
   });
  }
 
