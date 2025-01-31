@@ -10,13 +10,11 @@
         android:id="@+id/expressionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="operation"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/minusButton"
-        app:layout_constraintVertical_bias="0.396" />
+        app:layout_constraintTop_toBottomOf="@+id/pasteButton" />
 
     <Button
         android:id="@+id/oneButton"
@@ -140,10 +138,10 @@
 
     <TextView
         android:id="@+id/equalsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="279dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="24dp"
         android:text="="
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/expressionTextView" />
@@ -225,6 +223,16 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="428dp"
         android:text="Copy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pasteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="428dp"
+        android:text="Paste"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

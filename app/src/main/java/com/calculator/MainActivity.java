@@ -13,13 +13,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
  @Override
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  ((TextView) findViewById(R.id.appVersionTextView)).setText("9.0.0");
+  ((TextView) findViewById(R.id.appVersionTextView)).setText("10.0.0");
   TextView expressionTextView = findViewById(R.id.expressionTextView);
   expressionTextView.setText("0");
   initListeners(expressionTextView);
@@ -100,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
    ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE))
      .setPrimaryClip(ClipData.newPlainText("",
        expressionTextView.getText().toString()));
+  });
+  findViewById(R.id.pasteButton).setOnClickListener((View v) -> {
+   Optional.ofNullable(((ClipboardManager) getSystemService(CLIPBOARD_SERVICE)).getPrimaryClip())
+     .filter(Objects::nonNull)
+     .filter(clipData -> clipData.getItemCount() > 0)
+     .ifPresent(clipData -> expressionTextView.setText(clipData.getItemAt(0).getText()));
   });
  }
 
