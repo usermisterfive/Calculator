@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  ((TextView) findViewById(R.id.appVersionTextView)).setText("10.0.0");
+  ((TextView) findViewById(R.id.appVersionTextView)).setText("11.0.0");
   TextView expressionTextView = findViewById(R.id.expressionTextView);
   expressionTextView.setText("0");
   initListeners(expressionTextView);
