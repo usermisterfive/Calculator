@@ -100,8 +100,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{env.version_name}}
-        release_name: Automatic Release
+        tag_name: v${{env.version_name}}
+        release_name: v${{env.version_name}}
         draft: false
         prerelease: false
 
