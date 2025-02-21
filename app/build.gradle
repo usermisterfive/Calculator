@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-project.ext.set("versionName", "12.3.2")
+project.ext.set("versionName", "12.3.3")
 
 android {
     compileSdk 34
