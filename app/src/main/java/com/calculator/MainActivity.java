@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 
@@ -49,17 +46,17 @@ public class MainActivity extends AppCompatActivity {
     Helper.typeDigit(expressionTextView, 0));
 
   findViewById(R.id.plusButton).setOnClickListener((View v) ->
-    expressionTextView.setText(
-      Helper.removeDuplicateOperator(expressionTextView) + Operators.PLUS.getSign()));
+    expressionTextView.setText(String.format("%s%s",
+      Helper.removeDuplicateOperator(expressionTextView), Operators.PLUS.getSign())));
   findViewById(R.id.minusButton).setOnClickListener((View v) ->
-    expressionTextView.setText(
-      Helper.removeDuplicateOperator(expressionTextView) + Operators.MINUS.getSign()));
+    expressionTextView.setText(String.format("%s%s",
+        Helper.removeDuplicateOperator(expressionTextView), Operators.MINUS.getSign())));
   findViewById(R.id.multiplyButton).setOnClickListener((View v) ->
-    expressionTextView.setText(
-      Helper.removeDuplicateOperator(expressionTextView) + Operators.MULTIPLY.getSign()));
+    expressionTextView.setText(String.format("%s%s",
+      Helper.removeDuplicateOperator(expressionTextView), Operators.MULTIPLY.getSign())));
   findViewById(R.id.divideButton).setOnClickListener((View v) ->
-    expressionTextView.setText(
-      Helper.removeDuplicateOperator(expressionTextView) + Operators.DIVIDE.getSign()));
+    expressionTextView.setText(String.format("%s%s",
+      Helper.removeDuplicateOperator(expressionTextView), Operators.DIVIDE.getSign())));
 
   findViewById(R.id.equalsButton).setOnClickListener((View v) -> {
    String expression = expressionTextView.getText().toString();
@@ -76,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
    } while (endsWithOperatorTests.contains(true));
    expressionTextView.setText(expression);
-   ((TextView) findViewById(R.id.equalsTextView)).setText("="
-      + Helper.calculate(Helper.parse(expression)));
+   ((TextView) findViewById(R.id.equalsTextView)).setText(String.format("%s%s", "=",
+      + Helper.calculate(Helper.parse(expression))));
   });
 
   findViewById(R.id.resetButton).setOnClickListener((View v) ->
@@ -85,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
   findViewById(R.id.pointButton).setOnClickListener((View v) -> {
    if (expressionTextView.getText().toString().matches(".*\\d$")) {
-    expressionTextView.setText(expressionTextView.getText() + ".");
+    expressionTextView.setText(String.format("%s%s", expressionTextView.getText(), "."));
    }
   });
 
@@ -114,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 }
 enum Operators {
  PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
- private String sign;
+ private final String sign;
  Operators(String sign) {
   this.sign = sign;
  }

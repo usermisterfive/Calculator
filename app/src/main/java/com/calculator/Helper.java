@@ -71,7 +71,7 @@ public class Helper {
   if (expressionTextView.getText().equals("0")) {
    expressionTextView.setText(digit.toString());
   } else {
-   expressionTextView.setText(expressionTextView.getText() + digit.toString());
+   expressionTextView.setText(String.format("%s%s", expressionTextView.getText(), digit.toString()));
   }
  }
  static void multiplyDivide(List<String> numbers, List<String> operators, String operator) {
