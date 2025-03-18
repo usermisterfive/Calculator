@@ -20,13 +20,13 @@ public class Helper {
   List<List<String>> expression3 = new ArrayList<>();
   char[] chars = expression.toCharArray();
   List<String> stringNumbers = new ArrayList<>();
-  List<String> operators = new ArrayList<>();
+  List<String> symbols = new ArrayList<>();
   int numberId = 0;
   for (int iteration = 0; iteration < chars.length; iteration++) {
    String stringCharacter = String.valueOf(chars[iteration]);
    if (isParsableDouble(stringCharacter) || stringCharacter.equals(".")) {
     if (iteration == 0) {
-     operators.add(Operators.PLUS.getSign());
+     symbols.add(Symbols.PLUS.toString());
     }
     if (stringNumbers.size() < numberId + 1) {
      stringNumbers.add("");
@@ -36,13 +36,13 @@ public class Helper {
     if (iteration != 0) {
      numberId++;
     }
-    operators.add(stringCharacter);
+    symbols.add(stringCharacter);
    }
 
   }
   expression3.add(stringNumbers);
-  expression3.add(operators);
-  System.out.println("stringNumbers=" + stringNumbers + ", operators=" + operators);
+  expression3.add(symbols);
+  System.out.println("stringNumbers=" + stringNumbers + ", symbols=" + symbols);
   return expression3;
  }
  static double calculate(List<List<String>> list) {
@@ -50,13 +50,13 @@ public class Helper {
   System.out.println("list=" + list);
   if (list.size() == 2) {
    List<String> numbers = list.get(0);
-   List<String> operators = list.get(1);
+   List<String> symbols = list.get(1);
    List<Double> expression2 = new ArrayList<>();
-   multiplyDivide(numbers, operators, Operators.MULTIPLY.getSign());
-   multiplyDivide(numbers, operators, Operators.DIVIDE.getSign());
+   multiplyDivide(numbers, symbols, Symbols.MULTIPLY.toString());
+   multiplyDivide(numbers, symbols, Symbols.DIVIDE.toString());
    for (int iteration = 0; iteration < numbers.size(); iteration++) {
     double number = Double.parseDouble(numbers.get(iteration));
-    if (operators.get(iteration).equals(Operators.MINUS.getSign())) {
+    if (symbols.get(iteration).equals(Symbols.MINUS.toString())) {
      number = - number;
     }
     expression2.add(number);
@@ -67,35 +67,42 @@ public class Helper {
   }
   return sum;
  }
- static void typeDigit(TextView expressionTextView, Integer digit) {
+ static void type(TextView expressionTextView, Integer digit) {
   if (expressionTextView.getText().equals("0")) {
    expressionTextView.setText(String.format(digit.toString()));
   } else {
    expressionTextView.setText(String.format("%s%s", expressionTextView.getText(), digit.toString()));
   }
  }
- static void multiplyDivide(List<String> numbers, List<String> operators, String operator) {
+ static void type(TextView expressionTextView, String symbol) {
+  if (expressionTextView.getText().equals("0")) {
+   expressionTextView.setText(symbol);
+  } else {
+   expressionTextView.setText(String.format("%s%s", expressionTextView.getText(), symbol));
+  }
+ }
+ static void multiplyDivide(List<String> numbers, List<String> symbols, String symbol) {
   for (int iteration = 0; iteration < numbers.size(); iteration++) {
-   if (operators.contains(operator)) {
-    int index = operators.indexOf(operator);
+   if (symbols.contains(symbol)) {
+    int index = symbols.indexOf(symbol);
     double numbersOperated = Double.NaN;
-    if (operator.equals(Operators.MULTIPLY.getSign())) {
+    if (symbol.equals(Symbols.MULTIPLY.toString())) {
      numbersOperated = Double.parseDouble(numbers.get(index))
        * Double.parseDouble(numbers.get(index - 1));
-    } else if (operator.equals(Operators.DIVIDE.getSign())) {
+    } else if (symbol.equals(Symbols.DIVIDE.toString())) {
      numbersOperated = Double.parseDouble(numbers.get(index - 1)) /
        Double.parseDouble(numbers.get(index));
     }
     numbers.set(index - 1, String.valueOf(numbersOperated));
     numbers.remove(index);
-    operators.remove(index);
+    symbols.remove(index);
    }
   }
  }
  static String removeDuplicateOperator(TextView expressionTextView) {
   String expression = expressionTextView.getText().toString();
-  for (Operators operator : Operators.values()) {
-   if (expression.endsWith(operator.getSign())) {
+  for (Symbols symbol : Symbols.values()) {
+   if (expression.endsWith(symbol.toString())) {
     expression = expression.substring(0, expression.length() - 1);
    }
   }

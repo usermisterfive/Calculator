@@ -25,46 +25,54 @@ public class MainActivity extends AppCompatActivity {
  }
  private void initListeners(TextView expressionTextView) {
   findViewById(R.id.oneButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 1));
+    Helper.type(expressionTextView, 1));
   findViewById(R.id.twoButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 2));
+    Helper.type(expressionTextView, 2));
   findViewById(R.id.threeButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 3));
+    Helper.type(expressionTextView, 3));
   findViewById(R.id.fourButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 4));
+    Helper.type(expressionTextView, 4));
   findViewById(R.id.fiveButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 5));
+    Helper.type(expressionTextView, 5));
   findViewById(R.id.sixButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 6));
+    Helper.type(expressionTextView, 6));
   findViewById(R.id.sevenButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 7));
+    Helper.type(expressionTextView, 7));
   findViewById(R.id.eightButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 8));
+    Helper.type(expressionTextView, 8));
   findViewById(R.id.nineButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 9));
+    Helper.type(expressionTextView, 9));
   findViewById(R.id.zeroButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 0));
+    Helper.type(expressionTextView, 0));
 
   findViewById(R.id.plusButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Operators.PLUS.getSign())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.PLUS.getSymbol())));
   findViewById(R.id.minusButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-        Helper.removeDuplicateOperator(expressionTextView), Operators.MINUS.getSign())));
+        Helper.removeDuplicateOperator(expressionTextView), Symbols.MINUS.getSymbol())));
   findViewById(R.id.multiplyButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Operators.MULTIPLY.getSign())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.MULTIPLY.getSymbol())));
   findViewById(R.id.divideButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Operators.DIVIDE.getSign())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.DIVIDE.getSymbol())));
+
+  findViewById(R.id.leftBracketButton).setOnClickListener((View v) ->
+    Helper.type(expressionTextView, Symbols.LEFT_BRACKET.getSymbol()));
+  findViewById(R.id.rightBracketButton).setOnClickListener((View v) -> {
+   if (expressionTextView.getText().toString().contains(Symbols.LEFT_BRACKET.getSymbol())) {
+    Helper.type(expressionTextView, Symbols.RIGHT_BRACKET.getSymbol());
+   }
+  });
 
   findViewById(R.id.equalsButton).setOnClickListener((View v) -> {
    String expression = expressionTextView.getText().toString();
    List<Boolean> endsWithOperatorTests = new ArrayList<>();
    do {
     endsWithOperatorTests.clear();
-    for (Operators operator : Operators.values()) {
-     boolean endsWithOperator2 = expression.endsWith(operator.getSign());
+    for (Symbols operator : Symbols.values()) {
+     boolean endsWithOperator2 = expression.endsWith(operator.getSymbol());
      if (endsWithOperator2) {
       expression = expression.substring(0, expression.length() - 1);
      }
@@ -107,14 +115,15 @@ public class MainActivity extends AppCompatActivity {
  }
 
 }
-enum Operators {
- PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
- private final String sign;
- Operators(String sign) {
-  this.sign = sign;
+enum Symbols {
+ PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/"), LEFT_BRACKET("("),
+  RIGHT_BRACKET("(");
+ private final String symbol;
+ Symbols(String symbol) {
+  this.symbol = symbol;
  }
- public String getSign() {
-  return sign;
+ public String getSymbol() {
+  return symbol;
  }
 
 }
