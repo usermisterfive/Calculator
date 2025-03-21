@@ -95,17 +95,15 @@ public class MainActivity extends AppCompatActivity {
    expressionTextView.setText(expression);
   });
 
-  findViewById(R.id.copyButton).setOnClickListener((View v) -> {
+  findViewById(R.id.copyButton).setOnClickListener((View v) ->
    ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE))
-     .setPrimaryClip(ClipData.newPlainText("",
-       expressionTextView.getText().toString()));
-  });
-  findViewById(R.id.pasteButton).setOnClickListener((View v) -> {
+     .setPrimaryClip(ClipData.newPlainText("", expressionTextView.getText().toString())));
+  findViewById(R.id.pasteButton).setOnClickListener((View v) ->
    Optional.ofNullable(((ClipboardManager) getSystemService(CLIPBOARD_SERVICE)).getPrimaryClip())
      .filter(Objects::nonNull)
      .filter(clipData -> clipData.getItemCount() > 0)
-     .ifPresent(clipData -> expressionTextView.setText(clipData.getItemAt(0).getText()));
-  });
+     .ifPresent(clipData -> expressionTextView.setText(clipData.getItemAt(0).getText()))
+  );
  }
 
 }
