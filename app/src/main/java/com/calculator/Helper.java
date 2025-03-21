@@ -16,8 +16,8 @@ public class Helper {
   }
   return isParsable;
  }
- static List parse(String expression) {
-  List<List<?>> expression3 = new ArrayList<>();
+ static List<List<String>> parse(String expression) {
+  List<List<String>> expression3 = new ArrayList<>();
   char[] chars = expression.toCharArray();
   List<String> stringNumbers = new ArrayList<>();
   List<String> operators = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Helper {
   return expression3;
  }
  static double calculate(List<List<String>> list) {
-  Double sum = 0.0;
+  double sum = 0.0;
   System.out.println("list=" + list);
   if (list.size() == 2) {
    List<String> numbers = list.get(0);
@@ -55,7 +55,7 @@ public class Helper {
    multiplyDivide(numbers, operators, Operators.MULTIPLY.getSign());
    multiplyDivide(numbers, operators, Operators.DIVIDE.getSign());
    for (int iteration = 0; iteration < numbers.size(); iteration++) {
-    Double number = Double.parseDouble(numbers.get(iteration));
+    double number = Double.parseDouble(numbers.get(iteration));
     if (operators.get(iteration).equals(Operators.MINUS.getSign())) {
      number = - number;
     }
@@ -69,7 +69,7 @@ public class Helper {
  }
  static void typeDigit(TextView expressionTextView, Integer digit) {
   if (expressionTextView.getText().equals("0")) {
-   expressionTextView.setText(digit.toString());
+   expressionTextView.setText(String.format(digit.toString()));
   } else {
    expressionTextView.setText(String.format("%s%s", expressionTextView.getText(), digit.toString()));
   }
@@ -78,7 +78,7 @@ public class Helper {
   for (int iteration = 0; iteration < numbers.size(); iteration++) {
    if (operators.contains(operator)) {
     int index = operators.indexOf(operator);
-    Double numbersOperated = Double.NaN;
+    double numbersOperated = Double.NaN;
     if (operator.equals(Operators.MULTIPLY.getSign())) {
      numbersOperated = Double.parseDouble(numbers.get(index))
        * Double.parseDouble(numbers.get(index - 1));
@@ -86,7 +86,7 @@ public class Helper {
      numbersOperated = Double.parseDouble(numbers.get(index - 1)) /
        Double.parseDouble(numbers.get(index));
     }
-    numbers.set(index - 1, numbersOperated.toString());
+    numbers.set(index - 1, String.valueOf(numbersOperated));
     numbers.remove(index);
     operators.remove(index);
    }
