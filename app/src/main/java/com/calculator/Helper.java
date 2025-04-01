@@ -4,7 +4,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Helper {
  static boolean isParsableDouble(String value) {
