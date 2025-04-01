@@ -1,5 +1,6 @@
 package com.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
@@ -47,32 +48,35 @@ public class MainActivity extends AppCompatActivity {
 
   findViewById(R.id.plusButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Symbols.PLUS.getSymbol())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.PLUS)));
   findViewById(R.id.minusButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-        Helper.removeDuplicateOperator(expressionTextView), Symbols.MINUS.getSymbol())));
+        Helper.removeDuplicateOperator(expressionTextView), Symbols.MINUS)));
   findViewById(R.id.multiplyButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Symbols.MULTIPLY.getSymbol())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.MULTIPLY)));
   findViewById(R.id.divideButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Symbols.DIVIDE.getSymbol())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.DIVIDE)));
 
   findViewById(R.id.leftBracketButton).setOnClickListener((View v) ->
-    Helper.type(expressionTextView, Symbols.LEFT_BRACKET.getSymbol()));
+    Helper.type(expressionTextView, Symbols.LEFT_BRACKET.toString()));
   findViewById(R.id.rightBracketButton).setOnClickListener((View v) -> {
-   if (expressionTextView.getText().toString().contains(Symbols.LEFT_BRACKET.getSymbol())) {
-    Helper.type(expressionTextView, Symbols.RIGHT_BRACKET.getSymbol());
+   if (expressionTextView.getText().toString().contains(Symbols.LEFT_BRACKET.toString())) {
+    Helper.type(expressionTextView, Symbols.RIGHT_BRACKET.toString());
    }
   });
 
   findViewById(R.id.equalsButton).setOnClickListener((View v) -> {
    String expression = expressionTextView.getText().toString();
    List<Boolean> endsWithOperatorTests = new ArrayList<>();
+
    do {
     endsWithOperatorTests.clear();
-    for (Symbols operator : Symbols.values()) {
-     boolean endsWithOperator2 = expression.endsWith(operator.getSymbol());
+    List<Symbols> symbols = new ArrayList<>(List.of(Symbols.values()));
+    symbols.remove(Symbols.RIGHT_BRACKET);
+    for (Symbols operator : symbols) {
+     boolean endsWithOperator2 = expression.endsWith(operator.toString());
      if (endsWithOperator2) {
       expression = expression.substring(0, expression.length() - 1);
      }
@@ -80,7 +84,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
    } while (endsWithOperatorTests.contains(true));
+
    expressionTextView.setText(expression);
+
+   if (expression.chars().filter(ch -> ch == Symbols.LEFT_BRACKET.getCharacter()).count() == 1
+     && expression.chars().filter(ch -> ch == Symbols.RIGHT_BRACKET.getCharacter()).count() == 1) {
+    expression = Helper.replaceBracketExpression(expression);
+   } else if (expression.contains(Symbols.LEFT_BRACKET.toString())
+     || expression.contains(Symbols.RIGHT_BRACKET.toString())) {
+    while (expression.contains(Symbols.LEFT_BRACKET.toString())
+      || expression.contains(Symbols.RIGHT_BRACKET.toString())) {
+     expression = expression.replace(Symbols.LEFT_BRACKET.toString(), "")
+       .replace(Symbols.RIGHT_BRACKET.toString(), "");
+    }
+    expressionTextView.setText(expression);
+   }
+
    ((TextView) findViewById(R.id.equalsTextView)).setText(String.format("%s%s", "=",
       + Helper.calculate(Helper.parse(expression))));
   });
@@ -117,12 +136,18 @@ public class MainActivity extends AppCompatActivity {
 }
 enum Symbols {
  PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/"), LEFT_BRACKET("("),
-  RIGHT_BRACKET("(");
+  RIGHT_BRACKET(")");
  private final String symbol;
+ private final Character character;
  Symbols(String symbol) {
   this.symbol = symbol;
+  this.character = symbol.toCharArray()[0];
  }
- public String getSymbol() {
+ public Character getCharacter() {
+  return character;
+ }
+ @Override @NonNull
+ public String toString() {
   return symbol;
  }
 
