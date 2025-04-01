@@ -1,5 +1,6 @@
 package com.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
@@ -25,46 +26,57 @@ public class MainActivity extends AppCompatActivity {
  }
  private void initListeners(TextView expressionTextView) {
   findViewById(R.id.oneButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 1));
+    Helper.type(expressionTextView, 1));
   findViewById(R.id.twoButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 2));
+    Helper.type(expressionTextView, 2));
   findViewById(R.id.threeButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 3));
+    Helper.type(expressionTextView, 3));
   findViewById(R.id.fourButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 4));
+    Helper.type(expressionTextView, 4));
   findViewById(R.id.fiveButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 5));
+    Helper.type(expressionTextView, 5));
   findViewById(R.id.sixButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 6));
+    Helper.type(expressionTextView, 6));
   findViewById(R.id.sevenButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 7));
+    Helper.type(expressionTextView, 7));
   findViewById(R.id.eightButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 8));
+    Helper.type(expressionTextView, 8));
   findViewById(R.id.nineButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 9));
+    Helper.type(expressionTextView, 9));
   findViewById(R.id.zeroButton).setOnClickListener((View v) ->
-    Helper.typeDigit(expressionTextView, 0));
+    Helper.type(expressionTextView, 0));
 
   findViewById(R.id.plusButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Operators.PLUS.getSign())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.PLUS)));
   findViewById(R.id.minusButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-        Helper.removeDuplicateOperator(expressionTextView), Operators.MINUS.getSign())));
+        Helper.removeDuplicateOperator(expressionTextView), Symbols.MINUS)));
   findViewById(R.id.multiplyButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Operators.MULTIPLY.getSign())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.MULTIPLY)));
   findViewById(R.id.divideButton).setOnClickListener((View v) ->
     expressionTextView.setText(String.format("%s%s",
-      Helper.removeDuplicateOperator(expressionTextView), Operators.DIVIDE.getSign())));
+      Helper.removeDuplicateOperator(expressionTextView), Symbols.DIVIDE)));
+
+  findViewById(R.id.leftBracketButton).setOnClickListener((View v) ->
+    Helper.type(expressionTextView, Symbols.LEFT_BRACKET.toString()));
+  findViewById(R.id.rightBracketButton).setOnClickListener((View v) -> {
+   if (expressionTextView.getText().toString().contains(Symbols.LEFT_BRACKET.toString())) {
+    Helper.type(expressionTextView, Symbols.RIGHT_BRACKET.toString());
+   }
+  });
 
   findViewById(R.id.equalsButton).setOnClickListener((View v) -> {
    String expression = expressionTextView.getText().toString();
    List<Boolean> endsWithOperatorTests = new ArrayList<>();
+
    do {
     endsWithOperatorTests.clear();
-    for (Operators operator : Operators.values()) {
-     boolean endsWithOperator2 = expression.endsWith(operator.getSign());
+    List<Symbols> symbols = new ArrayList<>(List.of(Symbols.values()));
+    symbols.remove(Symbols.RIGHT_BRACKET);
+    for (Symbols operator : symbols) {
+     boolean endsWithOperator2 = expression.endsWith(operator.toString());
      if (endsWithOperator2) {
       expression = expression.substring(0, expression.length() - 1);
      }
@@ -72,7 +84,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
    } while (endsWithOperatorTests.contains(true));
+
    expressionTextView.setText(expression);
+
+   if (expression.chars().filter(ch -> ch == Symbols.LEFT_BRACKET.getCharacter()).count() == 1
+     && expression.chars().filter(ch -> ch == Symbols.RIGHT_BRACKET.getCharacter()).count() == 1) {
+    expression = Helper.replaceBracketExpression(expression);
+   } else if (expression.contains(Symbols.LEFT_BRACKET.toString())
+     || expression.contains(Symbols.RIGHT_BRACKET.toString())) {
+    while (expression.contains(Symbols.LEFT_BRACKET.toString())
+      || expression.contains(Symbols.RIGHT_BRACKET.toString())) {
+     expression = expression.replace(Symbols.LEFT_BRACKET.toString(), "")
+       .replace(Symbols.RIGHT_BRACKET.toString(), "");
+    }
+    expressionTextView.setText(expression);
+   }
+
    ((TextView) findViewById(R.id.equalsTextView)).setText(String.format("%s%s", "=",
       + Helper.calculate(Helper.parse(expression))));
   });
@@ -107,14 +134,21 @@ public class MainActivity extends AppCompatActivity {
  }
 
 }
-enum Operators {
- PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
- private final String sign;
- Operators(String sign) {
-  this.sign = sign;
+enum Symbols {
+ PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/"), LEFT_BRACKET("("),
+  RIGHT_BRACKET(")");
+ private final String symbol;
+ private final Character character;
+ Symbols(String symbol) {
+  this.symbol = symbol;
+  this.character = symbol.toCharArray()[0];
  }
- public String getSign() {
-  return sign;
+ public Character getCharacter() {
+  return character;
+ }
+ @Override @NonNull
+ public String toString() {
+  return symbol;
  }
 
 }
