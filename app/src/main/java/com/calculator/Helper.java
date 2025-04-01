@@ -110,21 +110,11 @@ public class Helper {
   return expression;
  }
 
- /**
-  * In this implementation works only with one left bracket and one right bracket.
-  * @param expression to process
-  * @return modified expression
-  */
  static String replaceBracketExpression(String expression) {
-  String expression2 = expression;
-  if (expression.chars().filter(ch -> ch == '(').count() == 1
-    && expression.chars().filter(ch -> ch == ')').count() == 1) {
-   expression2 = expression.replace(
-     expression.substring(expression.indexOf("("), expression.indexOf(")") + 1),
-     String.valueOf(calculate(parse(
-       expression.substring(expression.indexOf("(") + 1, expression.indexOf(")"))))));
-  }
-  return expression2;
+  return expression.replace(
+    expression.substring(expression.indexOf("("), expression.indexOf(")") + 1),
+    String.valueOf(calculate(parse(
+      expression.substring(expression.indexOf("(") + 1, expression.indexOf(")"))))));
  }
 
 
