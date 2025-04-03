@@ -18,8 +18,8 @@
 
     <Button
         android:id="@+id/oneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="46dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="36dp"
         android:text="@string/_1"
@@ -27,29 +27,89 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/twoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/threeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
+        android:layout_width="40dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="36dp"
         android:text="@string/_3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/pointButton"
+        android:layout_width="40dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="244dp"
+        android:text="@string/dot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sixButton"
+        android:layout_width="40dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="108dp"
+        android:text="@string/_6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/plusButton"
+        android:layout_width="39dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/plus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/minusButton"
+        android:layout_width="41dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="176dp"
+        android:text="@string/minus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/multiplyButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="108dp"
+        android:text="@string/multiply"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/divideButton"
+        android:layout_width="39dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="244dp"
+        android:text="@string/divide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/nineButton"
+        android:layout_width="41dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="176dp"
+        android:text="@string/_9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/fourButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="39dp"
+        android:layout_height="47dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="108dp"
         android:text="@string/_4"
@@ -57,29 +117,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/fiveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="108dp"
-        android:text="@string/_5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/sixButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="108dp"
-        android:text="@string/_6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/sevenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="39dp"
+        android:layout_height="47dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="176dp"
         android:text="@string/_7"
@@ -88,39 +128,39 @@
 
     <Button
         android:id="@+id/eightButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_width="39dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="176dp"
         android:text="@string/_8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/nineButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="180dp"
-        android:text="@string/_9"
+        android:id="@+id/fiveButton"
+        android:layout_width="39dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="108dp"
+        android:text="@string/_5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/plusButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="308dp"
-        android:text="@string/plus"
+        android:id="@+id/twoButton"
+        android:layout_width="39dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/zeroButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_width="39dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="244dp"
         android:text="@string/_0"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="272dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginTop="108dp"
         android:text="@string/equalsButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -158,8 +198,8 @@
 
     <Button
         android:id="@+id/resetButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="41dp"
+        android:layout_height="48dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="244dp"
         android:text="@string/c"
@@ -167,51 +207,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/minusButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="308dp"
-        android:text="@string/minus"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/multiplyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="308dp"
-        android:text="@string/multiply"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/pointButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="244dp"
-        android:text="@string/dot"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/divideButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="368dp"
-        android:text="@string/divide"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/backspaceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="36dp"
         android:text="@string/backspace"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -220,8 +220,8 @@
         android:id="@+id/copyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="312dp"
         android:text="@string/copy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -230,8 +230,8 @@
         android:id="@+id/pasteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="372dp"
         android:text="@string/paste"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -241,7 +241,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="272dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginTop="176dp"
         android:text="("
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -250,8 +250,8 @@
         android:id="@+id/rightBracketButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="488dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="244dp"
         android:text=")"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
