@@ -1,4 +1,6 @@
-Build is ![workflow](https://github.com/usermisterfive/Calculator/actions/workflows/gradle.yml/badge.svg)
+Build
+
+![workflow](https://github.com/usermisterfive/Calculator/actions/workflows/push.yml/badge.svg)
 
 Demo
 
