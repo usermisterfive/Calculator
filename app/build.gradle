@@ -2,13 +2,14 @@ plugins {
     id 'com.android.application'
 }
 
-project.ext.set("versionName", "13.3.1")
+project.ext.set("applicationName", "calculator")
+project.ext.set("versionName", "13.4.0")
 
 android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.calculator"
+        applicationId "com." + "${project.applicationName}"
         minSdk 30
         targetSdk 34
         versionCode 1
@@ -45,3 +46,10 @@ tasks.register('printVersionName') {
         println "${project.versionName}"
     }
 }
+
+tasks.register('printApplicationName') {
+    doLast {
+        println "${project.applicationName}"
+    }
+}
+
