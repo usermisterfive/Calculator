@@ -26,4 +26,4 @@ jobs:
       with:
         result-encoding: string
         script: |
-          echo ${{ context.issue.number }}
+          echo context.issue.number
