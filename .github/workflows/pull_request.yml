@@ -22,5 +22,8 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
-    - name: Build with Gradle Wrapper
-      run: echo ${{ context }}
+    - uses: actions/github-script@v7
+      with:
+        result-encoding: string
+        script: |
+          echo ${{ context.issue.number }}
