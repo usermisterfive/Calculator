@@ -27,5 +27,5 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: 'Test comment ${context.issue.number}'
+            body: 'Test comment ${{context.issue.number}}'
           })
