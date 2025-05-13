@@ -29,3 +29,4 @@ jobs:
             repo: context.repo.repo,
             body: 'Test comment'
           })
+      run: echo context.issue.number
