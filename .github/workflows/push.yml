@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Java CI Release On Push with Gradle
 
 on:
   push:
@@ -59,6 +59,14 @@ jobs:
       run: |
         echo VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName) >> $GITHUB_ENV
         echo APPLICATION_NAME=$(${{github.workspace}}/gradlew -q printApplicationName) >> $GITHUB_ENV
+
+    - name: Fail if version is empty
+      if: ${{ env.VERSION_NAME == '' }}
+      run: exit 1
+
+    - name: Fail if app name is empty
+      if: ${{ env.APPLICATION_NAME == '' }}
+      run: exit 1
 
     - name: Create Release and Upload APK to Release
       run: |
