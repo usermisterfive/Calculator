@@ -3,7 +3,7 @@ plugins {
 }
 
 project.ext.set("applicationName", "calculator")
-project.ext.set("versionName", "13.5.0")
+project.ext.set("versionName", "13.5.1")
 
 android {
     compileSdk 34
